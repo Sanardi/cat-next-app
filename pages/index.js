@@ -16,7 +16,8 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js by Catherine!</a>
         </h1>
 
-        <iframe src="https://giphy.com/embed/pyFsc5uv5WPXN9Ocki" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/pyFsc5uv5WPXN9Ocki">via GIPHY</a></p>
+        <iframe src="https://giphy.com/embed/pyFsc5uv5WPXN9Ocki" width="200" height="200" frameBorder="0" className="giphy-embed" allowFullScreen></iframe><
+          p><a href="https://giphy.com/gifs/pyFsc5uv5WPXN9Ocki">via GIPHY</a></p>
       </main>
 
       <footer className={styles.footer}>
