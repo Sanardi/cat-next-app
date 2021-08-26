@@ -10,6 +10,7 @@ COPY package*.json ./
 
 # Executes commands
 RUN npm ci
+RUN npm run-script build 
 
 # Copies files from source to destination, in this case the root of the build context
 # into the root of the WORKDIR
