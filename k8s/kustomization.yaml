@@ -5,9 +5,9 @@ resources:
 - service.yaml
 - route.yaml
 commonLabels:
-  app: sanardi-cat-node-app
-  app.kubernetes.io/instance: sanardi-cat-node-app-instance
-  app.kubernetes.io/name: sanardi-cat-node-app
+  app: sanardi-cat-next-app
+  app.kubernetes.io/instance: sanardi-cat-next-app-instance
+  app.kubernetes.io/name: sanardi-cat-next-app
 images:
-- name: quay.io/upslopeio/cat-node-app
-  newName: quay.io/sanardibla/cat-node-app
+- name: quay.io/upslopeio/cat-next-app
+  newName: quay.io/sanardibla/cat-next-app
