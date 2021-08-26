@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- service.yaml
+- route.yaml
+commonLabels:
+  app: sanardi-cat-node-app
+  app.kubernetes.io/instance: sanardi-cat-node-app-instance
+  app.kubernetes.io/name: sanardi-cat-node-app
+images:
+- name: quay.io/upslopeio/cat-node-app
+  newName: quay.io/sanardibla/cat-node-app

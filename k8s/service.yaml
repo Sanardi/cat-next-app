@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cat-node-app
+    app.kubernetes.io/instance: cat-node-app-instance
+    app.kubernetes.io/name: cat-node-app
+  name: cat-node-app
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app.kubernetes.io/instance: cat-node-app-instance
+    app.kubernetes.io/name: cat-node-app
+  sessionAffinity: None
+  type: ClusterIP
