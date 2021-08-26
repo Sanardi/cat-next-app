@@ -10,11 +10,13 @@ COPY package*.json ./
 
 # Executes commands
 RUN npm ci
-RUN npm run-script build 
 
 # Copies files from source to destination, in this case the root of the build context
 # into the root of the WORKDIR
 COPY . .
+
+#builds app
+RUN npm run-script build 
 
 # Document that this container exposes something on port 3000
 EXPOSE 3000
