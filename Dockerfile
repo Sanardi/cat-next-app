@@ -1,19 +1,25 @@
-# Build the app
-FROM quay.io/upslopeio/node-alpine as build
-WORKDIR /usr/src/app
-
-COPY . .
-RUN npm ci
-RUN npm run build
-
-# Run app
+# Use node Docker image, version 16-alpine
 FROM quay.io/upslopeio/node-alpine
 
-# Only copy files required to run the app
-COPY --from=build /app/.next ./
-COPY --from=build /app/package.json ./
-COPY --from=build /app/package-lock.json ./
+# From the documentation, "The WORKDIR instruction sets the working directory for any
+# RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile"
+WORKDIR /usr/src/app
 
+# COPY package.json and package-lock.json into root of WORKDIR
+COPY package*.json ./
+
+# Executes commands
+RUN npm ci
+
+# Copies files from source to destination, in this case the root of the build context
+# into the root of the WORKDIR
+COPY . .
+
+#builds app
+RUN npm run-script build 
+
+# Document that this container exposes something on port 3000
 EXPOSE 3000
 
+# Command to use for starting the application
 CMD ["npm", "start"]
