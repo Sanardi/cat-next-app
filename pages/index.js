@@ -13,7 +13,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js by Catherine!</a>
+          Welcome to <a href="https://nextjs.org">Hello. Next.js by Catherine!</a>
         </h1>
 
         <iframe src="https://giphy.com/embed/pyFsc5uv5WPXN9Ocki" width="200" height="200" frameBorder="0" className="giphy-embed" allowFullScreen></iframe><
