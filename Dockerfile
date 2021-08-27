@@ -1,25 +1,33 @@
-# Use node Docker image, version 16-alpine
-FROM quay.io/upslopeio/node-alpine
+# Build the app
+FROM node:14-alpine as build
+WORKDIR /app
 
-# From the documentation, "The WORKDIR instruction sets the working directory for any
-# RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile"
-WORKDIR /usr/src/app
-
-# COPY package.json and package-lock.json into root of WORKDIR
-COPY package*.json ./
-
-# Executes commands
-RUN npm ci
-
-# Copies files from source to destination, in this case the root of the build context
-# into the root of the WORKDIR
 COPY . .
+RUN npm ci
+RUN npm run build
+COPY ./.next ./.next
 
-#builds app
-RUN npm run-script build 
 
-# Document that this container exposes something on port 3000
+# Run app
+FROM node:14-alpine
+
+# Only copy files required to run the app
+COPY --from=build /app/.next ./
+COPY --from=build /app/package.json ./
+COPY --from=build /app/package-lock.json ./
+
 EXPOSE 3000
 
-# Command to use for starting the application
+# Required for healthcheck defined in docker-compose.yml
+# If you don't have a healthcheck that uses curl, don't install it
+RUN apk --no-cache add curl
+
+# By adding --production npm's devDependencies are not installed
+RUN npm ci --production
+RUN ./node_modules/.bin/next telemetry disable
+
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+USER nextjs
 CMD ["npm", "start"]
