@@ -5,8 +5,6 @@ WORKDIR /app
 COPY . .
 RUN npm ci
 RUN npm run build
-COPY ./.next ./.next
-
 
 # Run app
 FROM node:14-alpine
