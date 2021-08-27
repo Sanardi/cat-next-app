@@ -22,7 +22,7 @@ RUN apk --no-cache add curl
 
 # By adding --production npm's devDependencies are not installed
 RUN npm ci --production
-RUN ./node_modules/.bin/next telemetry disable
+RUN npm run-script build
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
